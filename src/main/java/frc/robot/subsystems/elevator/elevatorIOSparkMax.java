@@ -9,6 +9,8 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+// import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
 
 public class elevatorIOSparkMax implements elevatorIO {
@@ -20,10 +22,13 @@ public class elevatorIOSparkMax implements elevatorIO {
 
 	// Constructor
 	public elevatorIOSparkMax() {
+
 		leadMotor = new SparkMax(15, MotorType.kBrushless);
 		followerMotor = new SparkMax(16, MotorType.kBrushless);
 		leadEncoder = leadMotor.getEncoder();
 		followerEncoder = followerMotor.getEncoder();
+
+		Shuffleboard.getTab("SmartDashboard").add("Elevator Encoder", leadEncoder);
 
 		this.leadPIDController = this.leadMotor.getClosedLoopController();
 
